@@ -35,6 +35,7 @@ end
 
 gem 'devise'
 gem 'sprockets'
+gem "active_link_to"
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

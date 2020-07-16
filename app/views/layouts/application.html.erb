@@ -8,21 +8,20 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="container">
+  <body id="<%= "controller_"+controller_name %>" class="<%= "container action_"+params[:action] %>">
 	<header class="mb-3">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <a class="navbar-brand mr-5" href="#">Move and Groove</a>
+      <%= link_to "Move and Groove", root_path, class: "navbar-brand mr-5" %>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav ml-5">
-			  <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
-        <%= link_to "Activity", activities_path, class: "nav-item nav-link" %>
-        <%= link_to "Account", user_session_path(1), class: "nav-item nav-link" if false %>
-        <%= link_to "Login", new_user_session_path, class: "nav-item nav-link" %>
-        <%= link_to "Logout", destroy_user_session_path if false %>
-        <%= link_to "Signup", new_user_registration_path, class: "nav-item nav-link" %>
+        <%= active_link_to "Activity", activities_path, class: "nav-item nav-link" %>
+        <%= active_link_to "Account", user_session_path(1), class: "nav-item nav-link" if false %>
+        <%= active_link_to "Login", new_user_session_path, class: "nav-item nav-link" %>
+        <%= active_link_to "Logout", destroy_user_session_path if false %>
+        <%= active_link_to "Signup", new_user_registration_path, class: "nav-item nav-link" %>
 		  </div>
 		</nav>
 	</header>
@@ -39,10 +38,10 @@
 			<p class="alert"><%= alert %></p>
 		</nav>
 	</nav>
-	<main class="d-flex">
+	<main>
 		<%= yield %>
 	</main>
-	<footer class=>
+	<footer class="pt-5">
     <ul>
       <h3>Contact us</h3>
       <li>Phone: <span>00641254522</span></li>
