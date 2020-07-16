@@ -1,0 +1,28 @@
+body{
+	background:white;
+	>*{
+		background:whitesmoke;
+		margin-bottom:.5em 0;
+	}
+	header{
+	
+	}
+	nav{
+	
+	}
+	main{
+		margin:1em 0;
+		padding:2em;
+	}
+	footer{
+		display:flex;
+		flex-flow: row wrap;
+		justify-content:space-around;
+		>ul{
+			list-style:none;
+			li{
+				padding:.5em;
+			}
+		}
+	}
+}

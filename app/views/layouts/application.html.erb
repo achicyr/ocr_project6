@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OcrProject6</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class="container">
+	<header class="mb-3">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand mr-5" href="#">Move and Groove</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav ml-5">
+			  <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+        <%= link_to "Activity", activities_path, class: "nav-item nav-link" %>
+        <%= link_to "Account", user_session_path(1), class: "nav-item nav-link" if false %>
+        <%= link_to "Login", new_user_session_path, class: "nav-item nav-link" %>
+        <%= link_to "Logout", destroy_user_session_path if false %>
+        <%= link_to "Signup", new_user_registration_path, class: "nav-item nav-link" %>
+		  </div>
+		</nav>
+	</header>
+	<nav class="jumbotron text-center">
+		<h1 class="display-4">Move and Groove at your service</h1>
+		<p class="lead">Do you fill like you want to be stronger, better, faster ?</p>
+		<hr class="my-4">
+		<p>Just Jump In Our Sport Solutions ! Once in it, you won't believe it's real !</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="#" role="button">First month is free !</a>
+		</p>
+		<nav id="flashes">
+			<p class="notice"><%= notice %></p>
+			<p class="alert"><%= alert %></p>
+		</nav>
+	</nav>
+	<main class="d-flex">
+		<%= yield %>
+	</main>
+	<footer class=>
+    <ul>
+      <h3>Contact us</h3>
+      <li>Phone: <span>00641254522</span></li>
+      <li>Email: <span>contact@moveandgroove.com</span></li>
+    </ul>
+		<ul>
+      <h3>Partenars</h3>
+			<li><a href="somewhere">Aerosmic</a></li>
+			<li><a href="somewhereelse">Youstrongify</a></li>
+		</ul>
+	</footer>
+  </body>
+</html>
