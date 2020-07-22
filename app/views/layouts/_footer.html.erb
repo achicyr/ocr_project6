@@ -1,0 +1,18 @@
+<footer class="row pt-5 text-center">
+  <ul class="col-md">
+    <h3>Contact us</h3>
+    <li>Phone: <span>00641254522</span></li>
+    <li>Email: <span>contact@moveandgroove.com</span></li>
+  </ul>
+  <ul class="col-md">
+    <h3>Available Activities</h3>
+    <% @datas.each do |activity| %>
+      <li><%= link_to activity.name, activity %></li>
+    <% end %>
+  </ul>
+  <ul class="col-md">
+    <h3>Partenars</h3>
+    <li><a href="somewhere">Aerosmic</a></li>
+    <li><a href="somewhereelse">Youstrongify</a></li>
+  </ul>
+</footer>

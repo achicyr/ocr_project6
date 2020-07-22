@@ -1,3 +1,7 @@
 body#controller_activities{
-  main{}
+  main{
+    form{padding: 1em;    border-radius: .5em;    background: whitesmoke;border:0px solid;transition: box-shadow .5s, border .7s, background .3s;}
+    form:not(:hover){box-shadow: 0 0 5px 1px inset;}
+    form:hover{border:1px solid wheat;background: #f5deb32e;}
+  }
 }

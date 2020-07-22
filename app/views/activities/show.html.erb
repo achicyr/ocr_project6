@@ -1,4 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>
+<p id="notice alert alert-success"><%= notice %></p>
+<div class="">fdsfdsfd
+  <% @activity.name %>
+  <% @activity.description %>
+  <%  %>
+</div>
+<div class="">
+  <%= link_to 'Create an other one ?', edit_activity_path(@activity) %>
+  <br/>
+  <%= link_to 'Edit', edit_activity_path(@activity) %> |
+  <%= link_to 'Back', activities_path %>
+</div>

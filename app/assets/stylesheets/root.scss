@@ -1,4 +1,66 @@
+@font-face {
+  font-family: "h1";
+  src: url("fluid-groove.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "h2";
+ src: url("GistLight.otf") format("OpenType");
+}
+@font-face {
+ font-family: "h3";
+ src: url("playball.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "h3footer";
+ src: url("TheyPerished.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "jumbotron";
+ src: url("AlbertText-Bold.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "jumbotron2";
+ src: url("Playball.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "gotic";
+ src: url("dc_s.ttf") format("TrueType");
+}
+@font-face {
+ font-family: "btns";
+ src: url("Wedgie Regular.ttf") format("TrueType");
+}
 a.active {
   color: #6699ff !important;
   /* other styling here, as desired */
+}
+*:not(.navbar>a *){font-family:arial;}
+a.btn,input.btn,button.btn{font-family:"gotic";}
+h1,.h1{background: -webkit-linear-gradient(#eee, #333);  -webkit-background-clip: text;  -webkit-text-fill-color: transparent;
+  font-size:6em !important;
+  font-family: "h1";
+}
+h2,.h2{font-family: "h2";}
+h3,.h3{font-family: "h3";}
+footer h3{font-family: "h3footer";}
+hr:not(.clean){border: solid silver;}
+ul:not(.clean){list-style: none;}
+
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+body{
+  >header{
+    #logo{transition:box-shadow .5s;background-image: -webkit-linear-gradient(80deg, blue 25%, red);      -webkit-background-clip: text;      -webkit-text-fill-color: transparent;  font-family: h1;    font-size: 2em;}
+    #logo:hover{box-shadow: 0 0 5px 0px inset;background-image: -webkit-linear-gradient(80deg, red 25%, blue);  -webkit-background-clip: unset;      -webkit-text-fill-color: unset;  text-shadow:0 0 1px black,0 0 1px black,0 0 1px black;}
+    >nav{background: url(/favicon.ico) !important;
+      >a{background: white;box-shadow:none;padding:.5em;border-radius:5px;font-weight:900;
+        span:first-of-type{color: blue;}
+        span:nth-of-type(2){color: white;}
+        span:last-of-type{color: red;}
+      }
+    }
+  }
+  >main{
+  }
 }

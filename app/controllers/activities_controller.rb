@@ -3,6 +3,10 @@ class ActivitiesController < ApplicationController
 
   # GET /activities
   # GET /activities.json
+  def ok
+    @test = "je suis un test"
+  end
+  # GET /activities.json
   def index
     @activities = Activity.all
   end
@@ -10,6 +14,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.json
   def show
+    @activity = Activity.find_by_id(params[:id])
   end
 
   # GET /activities/new
@@ -28,7 +33,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to @activity, notice: 'Your activity entry was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -69,6 +74,6 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.fetch(:activity, {})
+      params.fetch(:activity, {}).permit(:name, :description)
     end
 end

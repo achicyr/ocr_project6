@@ -1,5 +1,7 @@
-<h1>New Activity</h1>
+<div class="text-right">
+  <%= link_to 'Back', activities_path, class: "btn btn-secondary mt-5"%>
+</div>
+<h1 class="text-center">New Activity</h1>
+
 
 <%= render 'form', activity: @activity %>
-
-<%= link_to 'Back', activities_path %>
