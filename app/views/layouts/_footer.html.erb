@@ -1,18 +1,26 @@
 <footer class="row pt-5 text-center">
   <ul class="col-md">
     <h3>Contact us</h3>
-    <li>Phone: <span>00641254522</span></li>
-    <li>Email: <span>contact@moveandgroove.com</span></li>
+    <% eval(@contents["contacts"][0].json).each do |ite| %>
+      <li><u><%= ite[:k].capitalize %>:</u> <span><%= ite[:v] %></span></li>
+    <% end %>
   </ul>
   <ul class="col-md">
     <h3>Available Activities</h3>
-    <% @datas.each do |activity| %>
-      <li><%= link_to activity.name, activity %></li>
+    <% @datas.collect.with_index do |activity, i| %>
+      <% if i.even? %>
+        <li class="row justify-content-around">
+      <% end %>
+      <%= link_to activity.name, activity %>
+      <% if !i.even? %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
   <ul class="col-md">
     <h3>Partenars</h3>
-    <li><a href="somewhere">Aerosmic</a></li>
-    <li><a href="somewhereelse">Youstrongify</a></li>
+    <% @contents["footer_partenars"].each do |content| %>
+      <li><a href="<%= content.href %>"><%= content.title.capitalize %></a></li>
+    <% end %>
   </ul>
 </footer>

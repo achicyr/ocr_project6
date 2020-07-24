@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_141612) do
+ActiveRecord::Schema.define(version: 2020_07_23_140046) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "activities_users", id: false, force: :cascade do |t|
+    t.integer "activity_id", null: false
+    t.integer "user_id", null: false
+    t.index ["activity_id", "user_id"], name: "index_activities_users_on_activity_id_and_user_id"
+    t.index ["user_id", "activity_id"], name: "index_activities_users_on_user_id_and_activity_id"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string "component_type"
+    t.string "title"
+    t.string "content"
+    t.string "href"
+    t.string "src"
+    t.string "json"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
