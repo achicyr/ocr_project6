@@ -1,26 +1,32 @@
-<footer class="row pt-5 text-center">
-  <ul class="col-md">
-    <h3>Contact us</h3>
-    <% eval(@contents["contacts"][0].json).each do |ite| %>
-      <li><u><%= ite[:k].capitalize %>:</u> <span><%= ite[:v] %></span></li>
-    <% end %>
-  </ul>
-  <ul class="col-md">
-    <h3>Available Activities</h3>
-    <% @datas.collect.with_index do |activity, i| %>
-      <% if i.even? %>
-        <li class="row justify-content-around">
+<footer class="container pt-5 text-center">
+  <%= render "layouts/components/navbar", type: "footer" %>
+  <hr>
+  <div class="row">
+    <ul class="col-md">
+      <h3>Contact us</h3>
+      <% eval(@contents["contacts"][0].json).each do |ite| %>
+        <li><u><%= ite[:k].capitalize %>:</u> <span><%= ite[:v] %></span></li>
       <% end %>
-      <%= link_to activity.name, activity %>
-      <% if !i.even? %>
-        </li>
+    </ul>
+    <!--
+    <ul class="col-md">
+      <h3>Available Activities</h3>
+      <% @datas.collect.with_index do |activity, i| %>
+        <% if i.even? %>
+          <li class="row justify-content-around">
+        <% end %>
+        <%= link_to activity.name, activity %>
+        <% if !i.even? %>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
-  <ul class="col-md">
-    <h3>Partenars</h3>
-    <% @contents["footer_partenars"].each do |content| %>
-      <li><a href="<%= content.href %>"><%= content.title.capitalize %></a></li>
-    <% end %>
-  </ul>
+    </ul>
+    -->
+    <ul class="col-md">
+      <h3>Partenars</h3>
+      <% @contents["footer_partenars"].each do |content| %>
+        <li><a href="<%= content.href %>"><%= content.title.capitalize %></a></li>
+      <% end %>
+    </ul>
+  </div>
 </footer>

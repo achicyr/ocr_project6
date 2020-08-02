@@ -1,18 +1,31 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token, only: [:add_activity, :unsubscribe]
+  skip_before_action :verify_authenticity_token, only: [:indexUser, :add_activity, :unsubscribe]
 
-  # GET /add_activity_to_account
+  # POST /add_activity_to_user
+  def add_log
+    a = UsersActivity.create(users_activity_params)
+    a=current_user.users_activities.new(activity_params)
+    a.save
+    puts"\n\n\n"
+    puts"OK§§§§§§§§§§§"
+    puts UsersActivity.all.inspect
+    puts params.inspect
+    puts"\n\n\n"
+    redirect_to action: :indexUser
+  end
+  # POST /add_activity_to_user
   def add_activity
     @act_to_add = Activity.find_by_id(params[:activity_id])
     current_user.activities.each do |a|
       if a == @act_to_add
         @act_to_add = nil
+        return redirect_to({action: "indexUser"}, alert: "This activity already exists in your logs.")
       end
     end
-    current_user.activities << @act_to_add
+    current_user.activities << @act_to_add if !@act_to_add.nil?
     #redirect_to Activity.all, notice: 'Congratulation '+current_user.email[(current_user.email.index('.')-1)+1..(current_user.email.index('@')-1)]+", you've just added activity '#{@act_to_add}' to your activities list !"
-    render :index, location: @activity
+    redirect_to({action: "indexUser"})
   end
   # GET /activities.json
   def ok
@@ -21,6 +34,11 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.all
+  end
+  # GET /activities.json
+  def indexUser
+    @activities = Activity.all
+    @newActivity = UsersActivity.new
   end
 
   # GET /activities/1
@@ -94,6 +112,10 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.fetch(:activity, {}).permit(:name, :description)
+      params.fetch(:activity, {}).permit(:name, :description, :users_activities)
+    end
+    # Only allow a list of trusted parameters through.
+    def users_activity_params
+      params.fetch(:users_activity, {}).permit(:when, :howlong, :performances)
     end
 end

@@ -1,0 +1,57 @@
+<p id="notice" class="<%= "alert alert-danger text-center py-2" if !defined?(notice) %>"><%= notice %></p>
+<p id="alert" class="<%= "alert alert-danger text-center py-2" if !alert.nil? %>"><%= alert %></p>
+<h1 class="text-center">Activities</h1>
+<hr/>
+<% if !current_user.activities.empty? %>
+  <h4><%= current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)].capitalize %>, you've already logged the <span class="text-warning font-weight-bold"><%= current_user.activities.size %></span> followings activities:</h4>
+<% end %>
+<div class="row userActivities__Index">
+  <% if current_user.activities.size == 0 %>
+    <div class="col-12 text-center">You don't have any activity registered yet !</div>
+    <div class="col-12 text-center">Add some just y filling the form below !</div>
+  <% else forformselect = []; current_user.activities.each do |activity| %>
+    <% if(forformselect.size % 3 == 0 && forformselect.size != 0) %>
+    </div>
+    <div class="row">
+    <% end %>
+    <div class="card col-md m-2" style="width: 18rem;">
+      <img class="card-img-top" src="" alt="MoveAndGroove activity: <% activity.name %>">
+      <div class="card-body userActivities__Index__Cards">
+        <u><h3 class="card-title text-center mb-4 "><%= activity.name.capitalize %></h3></u>
+        <div class="d-flex flex-column py-3 text-center">
+          <%= link_to "Show global activity details", activity, class: "btn btn-primary" %>
+          <%= link_to 'Edit', edit_activity_path(activity), class: "btn btn-info" if !current_user.email.index("admin").nil? %>
+          <% activity.users_activities.each do |u_a| if !u_a.users_activity_log_id.nil? then %>
+            <p title="<%#= u_a.performances %>">
+              - <span class="when">Le <%= u_a.created_at.strftime('%d-%m-%Y') %></span>:
+              <span class="howlong"><%#= u_a.howlong %> min</span>
+            </p>
+          <% else %>
+            <p class="alert alert-warning">You don't have logged anything yet for this activity.</p>
+          <% end end %>
+          <%#= link_to 'Unsuscribe', unsubscribe_path, method: :post, id: activity, data: {confirm: 'Are you sure?' } %>
+          <%#= link_to "Unsuscribe", {controller: "activities", action: "unsubscribe", id: activity}, class: "btn btn-warning", data: {confirm: 'Are you sure?' } %>
+        </div>
+        <hr>
+        <div class="row">
+          <p>Log a new entry for "<%= activity.name.capitalize %>" activity by clicking</p>
+          <button id="btn_show_log_form" class="btn btn-info">Log new entry</button>
+          <%= render "formUsersActivity", activity: activity.id, user: current_user.id %>
+        </div>
+      </div>
+    </div>
+  <% forformselect << [activity.name, activity.id]; end end %>
+</div>
+<div class="row my-5 justify-content-between userActivities__Filter">
+  <button class="btn btn-warning active">Show all your activities since begining</button>
+  <button class="btn btn-warning">Show only your last 1st activity</button>
+  <button class="btn btn-warning">Show only activity from current month</button>
+</div>
+<br>
+<hr>
+<h4>You can add more activities to your list:</h4>
+<form action="<%= add_activity_to_user_path %>" method="post">
+  <h3 class="text-center">Add an activity to your account:</h3>
+    <%= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }.excluding(forformselect)), class: "custom-select my-3") %>
+  <div class="text-center"><input type="submit" class="text-center btn btn-primary"/></div>
+</form>

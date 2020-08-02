@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when: 2020-07-29
+  howlong: 
+  performances: MyString
+  user: one
+  activity: one
+
+two:
+  when: 2020-07-29
+  howlong: 
+  performances: MyString
+  user: two
+  activity: two

@@ -1,0 +1,20 @@
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a href="<%= root_path %>" id="logo" class="navbar-brand mr-5">
+      <span>Move</span>
+      <span>and</span>
+      <span>Groove</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<%= "navbarNavAltMarkup_#{type}" %>" aria-controls="<%= "navbarNavAltMarkup_#{type}" %>" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="<%= "navbarNavAltMarkup_#{type}" %>">
+      <div class="navbar-nav ml-5 ">
+      <%= active_link_to "Your Activities", user_activity_index_path, class: "nav-item nav-link btn btn-light" if user_signed_in? %>
+      <%= active_link_to current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)], current_user, class: "nav-item nav-link btn btn-light" if user_signed_in? %>
+      <%= active_link_to "Login", new_user_session_path, class: "nav-item nav-link btn btn-light" if !user_signed_in? %>
+      <%= active_link_to "Signup", new_user_registration_path, class: "nav-item nav-link btn btn-light" if !user_signed_in? %>
+      <%= active_link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-item nav-link btn btn-light" if user_signed_in? %>
+      </div>
+    </div>
+  </nav>

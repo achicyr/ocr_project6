@@ -4,8 +4,8 @@
   <p><%= @activity.description %></p>
 </div>
 <div class="row">
-  <%= link_to 'Unsuscribe', {controller: "activities", action: "unsubscribe", id: @activity}, class: "btn btn-warning", data: { confirm: 'Are you sure?' } if current_user.activities.include? @activity %>
-  <%= link_to 'Back', activities_path, class: "btn btn-dark" %>
+  <%#= link_to 'Unsuscribe', {controller: "activities", action: "unsubscribe", id: @activity}, class: "btn btn-warning", data: { confirm: 'Are you sure?' } if current_user.activities.include? @activity %>
+  <%= link_to 'Back', user_activity_index_path, class: "btn btn-dark" %>
   <div class="float-right">
     <% if !current_user.email.index("admin").nil? %>
       <button class="btn btn-light"><%= link_to 'Edit', edit_activity_path(@activity) %></button>
