@@ -32,5 +32,5 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag controller_name, 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag controller_name, 'data-turbolinks-track': 'reload' if ["home","application","activities"].include?(controller_name) %>
 </html>

@@ -1,5 +1,6 @@
 User.create!([
-  {email: "hi.cyril@gmail.com", encrypted_password: "$2a$12$Xfph29VegirxHqNOx.cjbeTXTUCsw5.6ApkOf6WO3grANPohaLMHi", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
+  {email: "hi.cyril@gmail.com", password: "bigcyri", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
+  #{email: "hi.cyril@gmail.com", encrypted_password: "$2a$12$Xfph29VegirxHqNOx.cjbeTXTUCsw5.6ApkOf6WO3grANPohaLMHi", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil}
 ])
 Activity.create!([
   {name: "Body building", description: "A collection of exercice scheduled for every days of the week form monday to friday."},

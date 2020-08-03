@@ -1,17 +1,30 @@
-<%= form_with scope: :users_activities, local: true, url: add_log_to_user_activity_path, class: "w-100 userActivities__LogForm" do |f| %>
+<%#= form_with scope: :users_activities, local: true, url: add_log_to_user_activity_path, class: "w-100 userActivities__LogForm" do |f| %>
+<%= form_for activity, url: {action: "add_activityyy"} do |f| %>
+  <h3 class="text-center">Add an activity to your account:</h3>
+  <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }.excluding(forformselect)), class: "custom-select my-3") %>
+  <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }), class: "custom-select my-3") %>
+  <%#= f.collection_select :activity_id, Activity.order(:name),:id,:name, {include_blank: "Select your activity"}, {class: "custom-select my-3"} %>
+  <%= f.collection_select :activity_id, Activity.order(:name),:id,:name, {}, {class: "custom-select my-3"} %>
+  <hr>
+  <!--
   <button type="button" class="close" aria-label="Close" data-action="$(this).closest('.card').removeClass('beforeoverall on')" data-remove="0">
     <span aria-hidden="true">&times;</span>
   </button>
-  <%= f.hidden_field :activity_id, :value => activity %>
+  -->
   <%= f.hidden_field :user_id, :value => user %>
   <div class="form-group">
     <h4><%= f.label :hownlong %></h4>
-    <%= f.number_field :hownlong, class: "form-control", placeholder: "12" %> minutes
+    <%= f.number_field :howlong, class: "form-control", placeholder: "12" %> minutes
   </div>
   <hr>
   <div class="form-group">
     <h4><%= f.label :performances %></h4>
     <%= f.text_area :performances, class: "form-control", placeholder: "a small comment on my perfs and impressions for this activity log." %>
+  </div>
+  <hr>
+  <div class="form-group">
+    <h4><%= f.label :when_was_it_? %></h4>
+    <%= f.date_field :when, class: "form-control", placeholder: "a small comment on my perfs and impressions for this activity log." %>
   </div>
   <hr>
   <%= f.submit "Add log", class: "btn btn-primary", data: { disable_with: false } %>

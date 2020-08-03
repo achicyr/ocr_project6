@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     @datas = Activity.all
     @contents = getContents Content.all
   end
-  helper_method [:getActivities]
+  helper_method [:getActivities, :mytest]
 
   def self.navigationBar
     @navigationBar = '[{href: "/", html: "Accueil"}]'
@@ -14,12 +14,13 @@ class ApplicationController < ActionController::Base
   def getContents arr
     h = {}
     arr.each do |x|
-      if !h[x.component_type].respond_to?(:size)
-        h[x.component_type] = []
-      end
+      h[x.component_type] = [] if !h[x.component_type].respond_to?(:size)
       h[x.component_type] << x
     end
     puts h
     return h
+  end
+  def mytest
+    "yoyoyo je suis là"
   end
 end
