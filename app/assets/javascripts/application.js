@@ -11,3 +11,5 @@ $("main").on('click', '.close', function(e){
   }else target.hide()
   if(this.dataset.action)eval(this.dataset.action)
 })
+
+$("#usersactivities_filter button").click((e)=>{alert('sorry, those filters are not yet actived')})

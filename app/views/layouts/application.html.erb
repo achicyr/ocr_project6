@@ -4,9 +4,11 @@
     <title>OcrProject6</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body id="<%= "controller_"+controller_name %>" class="<%= "container action_"+params[:action] %>">
-    <div id="bo_dashboard" class="row">
+    <!--div id="bo_dashboard" class="row">
       <ul class="todolist todo col clean text-warning">
         <li>mettre en place le lien vers le compte user</li>
       </ul>
@@ -15,7 +17,7 @@
         <li>les pages sign in, sign up à intégrer avec bootstrap</li>
         <li></li>
       </ul>
-    </div>
+    </div-->
     <header class="mb-3">
       <%= render "layouts/components/navbar", type: "header" %>
       <% if notice %>

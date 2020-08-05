@@ -1,6 +1,17 @@
 <%#= form_with scope: :users_activities, local: true, url: add_log_to_user_activity_path, class: "w-100 userActivities__LogForm" do |f| %>
-<%= form_for activity, url: {action: "add_activityyy"} do |f| %>
-  <h3 class="text-center">Add an activity to your account:</h3>
+<%= form_for activity, url: {action: "add_activity"} do |f| %>
+<% if activity.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+    <ul>
+      <% activity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+  <h3 class="text-center">Select an activity to log on your recent(s) performance(s):</h3>
   <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }.excluding(forformselect)), class: "custom-select my-3") %>
   <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }), class: "custom-select my-3") %>
   <%#= f.collection_select :activity_id, Activity.order(:name),:id,:name, {include_blank: "Select your activity"}, {class: "custom-select my-3"} %>
@@ -13,17 +24,17 @@
   -->
   <%= f.hidden_field :user_id, :value => user %>
   <div class="form-group">
-    <h4><%= f.label :hownlong %></h4>
+    <h3><%= f.label :how_long_did_you_performed_this_activity_? %></h3>
     <%= f.number_field :howlong, class: "form-control", placeholder: "12" %> minutes
   </div>
   <hr>
   <div class="form-group">
-    <h4><%= f.label :performances %></h4>
+    <h3><%= f.label :performances %></h3>
     <%= f.text_area :performances, class: "form-control", placeholder: "a small comment on my perfs and impressions for this activity log." %>
   </div>
   <hr>
   <div class="form-group">
-    <h4><%= f.label :when_was_it_? %></h4>
+    <h3><%= f.label :when_was_it_? %></h3>
     <%= f.date_field :when, class: "form-control", placeholder: "a small comment on my perfs and impressions for this activity log." %>
   </div>
   <hr>

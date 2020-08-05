@@ -5,9 +5,42 @@ body#controller_activities{
     form:hover{border:1px solid wheat;background: #f5deb32e;}
     .card{
       transition: opacity .4s;
-      .userActivities__Index__Cards{
+      &>span[class*="sprite_"]{
+        width: 98px;
+        height: 140px;
+        background-image: image-url("activities.png");
+        &.sprite_0{background:black;}
+        &.sprite_1{background:black;}
+        &.sprite_2{background-position:0px 0px;}
+        &.sprite_3{background-position:0px 0px;}
+        &.sprite_4{background-position:-104px 0px;}
+        &.sprite_5{background-position:-208px 0px;}
+        &.sprite_6{background-position:-312px 0px;}
+        &.sprite_7{background-position:0px -146px;}
+        &.sprite_8{background-position:-104px -146px;}
+        &.sprite_9{background-position:-208px -146px;}
+        &.sprite_10{background-position:-312px -146px;}
+        &.sprite_11{background-position:-416px -146px;}
+        &.sprite_12{background-position:-520px -146px;}
+        &.sprite_13{background-position:-520px -292px;}
+        &.sprite_14{background-position:-416px -292px;}
+        &.sprite_15{background-position:-312px -292px;}
+        &.sprite_16{background-position:-208px -292px;}
+        &.sprite_17{background-position:-104px -292px;}
+        &.sprite_18{background-position:0px -292px;}
+        &.sprite_19{background-position:-416px 0px;}
+        &.sprite_20{background-position:-520px 0px;}
+      }
+      .userActivities__Index__Card{}
+      .userActivities__Index__CardBody{
         .when{text-decoration:underline;font-weight:bold;}
-        .howlong{color:orange;}
+        .howlong{}
+      }
+      .userActivities__Index__CardBody__content{
+        p{
+          margin-top:-2em;position:relative;
+          &::before{content:"Log description:";position:absolute;top:0;left:0;color:black;font-weight:bold;text-decoration:underline;}
+        }
       }
       form.userActivities__LogForm{z-index: -1;;opacity:0;position:absolute;}
       &.on form.userActivities__LogForm{z-index: unset;opacity:1;;top:1%;left:1%;width:98% !important;background:whitesmoke;}

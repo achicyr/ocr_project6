@@ -1,34 +1,43 @@
 <p id="notice" class="<%= "alert alert-danger text-center py-2" if !defined?(notice) %>"><%= notice %></p>
 <p id="alert" class="<%= "alert alert-danger text-center py-2" if !alert.nil? %>"><%= alert %></p>
 <h1 class="text-center">Activities</h1>
+<div class="add_log text-center">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <span class="material-icons">
+      library_add
+    </span>
+    Add new log ?
+  </button>
+</div>
 <hr/>
 <% if !current_user.activities.empty? %>
-  <h4><%= current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)].capitalize %>, you've already logged the <span class="text-warning font-weight-bold"><%= current_user.activities.size %></span> followings activities:</h4>
+  <h4><%= current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)].capitalize %>, you've already logged the <span class="badge badge-warning text-light font-weight-bold"><%= current_user.activities.size %></span> followings activities:</h4>
 <% end %>
 <div class="row userActivities__Index">
   <% if current_user.activities.size == 0 %>
     <div class="col-12 text-center">You don't have any activity registered yet !</div>
     <div class="col-12 text-center">Add some just y filling the form below !</div>
-  <% else current_user.users_activities.each do |u_a| %>
-    <p><% u_a.inspect %></p>
-    <div class="card col-12 m-2" style="width: 18rem;">
-      <img class="card-img-top" src="" alt="MoveAndGroove activity: <% u_a.activity.name %>">
-      <div class="card-body userActivities__Index__Cards">
-        <u><h3 class="card-title text-center mb-4 "><%= u_a.activity.name.capitalize %></h3></u>
-        <div class="d-flex flex-column py-3 text-center">
-          <%= link_to "Show global activity details", u_a.activity, class: "btn btn-primary" %>
+  <% else current_user.users_activities.each.with_index do |u_a, i| %>
+    <div class="card userActivities__Index__Card col-12 m-2 d-flex flex-row py-2" style="width: 18rem;">
+      <span class="userActivities__Index__CardImage sprite_<%= u_a.activity.id %>"></span>
+      <!--img class="card-img-top sprite_<%= u_a.activity.id %>" src="<%= image_url "activities.png" %>" alt="MoveAndGroove activity: <%= u_a.activity.name.downcase %>"-->
+      <div class="card-body userActivities__Index__CardBody py-0">
+        <h3 class="card-title text-center mb-4 userActivities__Index__CardBody_h3">
+          <%= link_to raw("<span title='Show global activity details' class='material-icons'>remove_red_eye</span>"), u_a.activity, class: "btn btn-primary", title: "Show global activity details" %>
+          <%= u_a.activity.name.capitalize %>
+        </h3>
+        <div class="d-flex flex-row py-3 text-center userActivities__Index__CardBody__content">
           <%= link_to 'Edit', edit_activity_path(u_a.activity), class: "btn btn-info" if !current_user.email.index("admin").nil? %>
           <%# activity.users_activities.each do |u_a|  if u_a.user_id == current_user.id && !u_a.performances.nil? then cpt+=1 %>
-            <p title="<%#= u_a.performances %>">
-              - <span class="when">Le <%= !u_a.when.nil? ? u_a.when : u_a.created_at.strftime('%d-%m-%Y') %></span>:
-              <span class="howlong"><%= u_a.howlong %> min</span>
-              - <p><%= u_a.performances %></p>
-            </p>
+            <div class="mr-3">
+              <span class="when badge badge-info mr-2"><%= !u_a.when.nil? ? u_a.when : u_a.created_at.strftime('%d-%m-%Y') %></span>
+              <span class="howlong badge badge-info"><%= u_a.howlong %> min</span>
+            </div>
+            <p class="bg-light w-100 p-1"><%= u_a.performances %></p>
           <%# end end %>
           <%#= link_to 'Unsuscribe', unsubscribe_path, method: :post, id: activity, data: {confirm: 'Are you sure?' } %>
           <%#= link_to "Unsuscribe", {controller: "activities", action: "unsubscribe", id: activity}, class: "btn btn-warning", data: {confirm: 'Are you sure?' } %>
         </div>
-        <hr>
         <!--
         <div class="row">
           <p>Log a new entry for "<%#= activity.name.capitalize %>" activity by clicking</p>
@@ -40,15 +49,39 @@
     </div>
   <% end end %>
 </div>
-<div class="row my-5 justify-content-between userActivities__Filter">
-  <button class="btn btn-warning active">Show all your activities since begining</button>
-  <button class="btn btn-warning">Show only your last 1st activity</button>
-  <button class="btn btn-warning">Show only activity from current month</button>
+<div id="usersactivities_filter" class="row my-5 justify-content-around userActivities__Filter">
+  <button class="btn btn-warning userActivities__Filter__allHistory disabled"><span title='Show only your 10 last activities ?' class='material-icons'>replay_10</span></button>
+  <button class="btn btn-warning userActivities__Filter__allHistory disabled"><span title='Show all your activities since first log ?' class='material-icons'>history</span></button>
+  <button class="btn btn-warning disabled"><span title='Show only activity from current month' class='material-icons'>timeline</span></button>
 </div>
 <br>
 <hr>
-<h4>You can add more activities to your list:</h4>
-<%= render "formUsersActivity", activity: @activity, user: current_user.id %>
+<div class="add_log text-center">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <span class="material-icons">
+      library_add
+    </span>
+    Add new log ?
+  </button>
+</div>
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter your new log on an activity</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "formUsersActivity", activity: @activity, user: current_user.id %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!--
 <form action="<%= add_activity_to_user_path %>" method="post">
   <h3 class="text-center">Add an activity to your account:</h3>

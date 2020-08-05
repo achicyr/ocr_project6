@@ -1,6 +1,14 @@
 <p id="notice alert alert-success"><%= notice %></p>
 <div class="">
   <h3><u>Activity:</u> <%= @activity.name %></h3>
+  <span class="badge badge-info" title="How many time in all this activity have been logged by YOU ?">
+    <span class="material-icons">person</span>
+    <%= @activity.users_activities.find_all{|n| n.user.id==current_user.id}.size %>
+  </span>
+  <span class="badge badge-info" title="How many time in all this activity have been logged by OUR USERS ?">
+    <span class="material-icons">people_alt</span>
+    <%= @activity.users_activities.size %>
+  </span>
   <p><%= @activity.description %></p>
 </div>
 <div class="row">

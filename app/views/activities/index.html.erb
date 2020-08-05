@@ -1,13 +1,26 @@
 <p id="notice"><%= notice %></p>
 <%= current_user.inspect %>
 <h1 class="text-center">Activities</h1>
+<p>For now, there is <span class="badge badge-info"><%= @activities.length %></span> activities:</p>
+<div class="text-center">
+  <a class="btn btn-primary" href="activities/new">
+    <span class="material-icons">
+      library_add
+    </span>
+    Add new Activity ?
+  </a>
+</div>
 <hr/>
 <div class="row">
   <% if current_user.activities.size == 0 %>
     <div class="col-12 text-center">You don't have any activity registered yet !</div>
     <div class="col-12 text-center">Add some just y filling the form below !</div>
-  <% else forformselect = []; current_user.activities.each do |activity| %>
-    <div class="card col-md mx-2" style="width: 18rem;">
+  <% else forformselect = []; @activities.each do |activity| %>
+    <% if forformselect.length%3 == 0 && forformselect.length != 0 %>
+      </div>
+      <div class="row">
+    <% end %>
+    <div class="card col-md m-2" style="width: 18rem;">
       <img class="card-img-top" src="" alt="MoveAndGroove activity: <% activity.name %>">
       <div class="card-body">
         <u><h3 class="card-title text-center mb-4 "><%= activity.name %></h3></u>
@@ -22,8 +35,11 @@
 </div>
 <br>
 <hr>
-<form action="<%= add_activity_path %>" method="post">
-  <h3 class="text-center">Add an activity to your account:</h3>
-  <%= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name, p.id ] }.excluding(forformselect)), class: "custom-select my-3") %>
-  <div class="text-center"><input type="submit" class="text-center btn btn-primary"/></div>
-</form>
+<div class="text-center">
+  <a class="btn btn-primary" href="activities/new">
+    <span class="material-icons">
+      library_add
+    </span>
+    Add new Activity
+  </a>
+</div>
