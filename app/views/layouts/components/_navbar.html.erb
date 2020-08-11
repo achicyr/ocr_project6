@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="<%= "navbarNavAltMarkup_#{type}" %>">
       <div class="navbar-nav ml-5 ">
       <%= active_link_to "Your Activities", user_activity_index_path, class: "nav-item nav-link btn btn-light" if user_signed_in? %>
-      <%= active_link_to current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)], current_user, class: "nav-item nav-link btn btn-light disabled", onclick: "alert('this link is not yet activated, sorry for that !')" if user_signed_in? %>
+      <%= active_link_to current_user.email[(current_user.email.index('.')+1)..(current_user.email.index('@')-1)], showUser_path(current_user), class: "nav-item nav-link btn btn-light" if user_signed_in? %>
       <%= active_link_to "Login", new_user_session_path, class: "nav-item nav-link btn btn-light" if !user_signed_in? %>
       <%= active_link_to "Signup", new_user_registration_path, class: "nav-item nav-link btn btn-light" if !user_signed_in? %>
       <%= active_link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-item nav-link btn btn-light" if user_signed_in? %>

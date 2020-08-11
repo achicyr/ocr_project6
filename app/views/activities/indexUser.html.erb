@@ -23,28 +23,23 @@
       <!--img class="card-img-top sprite_<%= u_a.activity.id %>" src="<%= image_url "activities.png" %>" alt="MoveAndGroove activity: <%= u_a.activity.name.downcase %>"-->
       <div class="card-body userActivities__Index__CardBody py-0">
         <h3 class="card-title text-center mb-4 userActivities__Index__CardBody_h3">
-          <%= link_to raw("<span title='Show global activity details' class='material-icons'>remove_red_eye</span>"), u_a.activity, class: "btn btn-primary", title: "Show global activity details" %>
-          <%= u_a.activity.name.capitalize %>
+          <u><%= u_a.activity.name.capitalize %></u>
+          :
+          <div class="float-right">
+            <%= link_to raw("<span title='Show global activity details' class='material-icons'>remove_red_eye</span>"), u_a.activity, class: "btn btn-primary", title: "Show global activity details" %>
+            <%= link_to raw("<span title='Edit this log' class='material-icons'>system_update_alt</span>"), editUserActivityLog_path(u_a.id), class: "btn btn-warning", title: "Edit this activity log" %>
+            <%= link_to raw("<span title='Delete this log' class='material-icons'>delete</span>"), deleteUserActivityLog_path(u_a.id), method: :delete, data: {confirm: "Are you sure you want to delete this log ?"}, class: "btn btn-danger", title: "Delete this activity log" %>
+          </div>
         </h3>
         <div class="d-flex flex-row py-3 text-center userActivities__Index__CardBody__content">
           <%= link_to 'Edit', edit_activity_path(u_a.activity), class: "btn btn-info" if !current_user.email.index("admin").nil? %>
           <%# activity.users_activities.each do |u_a|  if u_a.user_id == current_user.id && !u_a.performances.nil? then cpt+=1 %>
-            <div class="mr-3">
-              <span class="when badge badge-info mr-2"><%= !u_a.when.nil? ? u_a.when : u_a.created_at.strftime('%d-%m-%Y') %></span>
-              <span class="howlong badge badge-info"><%= u_a.howlong %> min</span>
-            </div>
-            <p class="bg-light w-100 p-1"><%= u_a.performances %></p>
-          <%# end end %>
-          <%#= link_to 'Unsuscribe', unsubscribe_path, method: :post, id: activity, data: {confirm: 'Are you sure?' } %>
-          <%#= link_to "Unsuscribe", {controller: "activities", action: "unsubscribe", id: activity}, class: "btn btn-warning", data: {confirm: 'Are you sure?' } %>
+          <div class="mr-3">
+            <span class="when badge badge-info mr-2"><%= !u_a.when.nil? ? u_a.when : u_a.created_at.strftime('%d-%m-%Y') %></span>
+            <span class="howlong badge badge-info"><%= u_a.howlong %> min</span>
+          </div>
+          <p class="bg-light w-100 p-1"><%= u_a.performances %></p>
         </div>
-        <!--
-        <div class="row">
-          <p>Log a new entry for "<%#= activity.name.capitalize %>" activity by clicking</p>
-          <button id="btn_show_log_form" class="btn btn-info">Log new entry</button>
-          <%#= render "formUsersActivity", activity: activity.id, user: current_user.id %>
-        </div>
-      -->
       </div>
     </div>
   <% end end %>

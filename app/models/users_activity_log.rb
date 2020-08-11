@@ -1,2 +1,0 @@
-class UsersActivityLog < ApplicationRecord
-end

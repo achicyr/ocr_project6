@@ -1,0 +1,7 @@
+<p><%#= @user.inspect %></p>
+<div>
+  <p>Your account identifier is: <span>@user.email</span></p>
+  <p>You created your account on: <span>@user.created_at</span></p>
+  <hr>
+  <%= link_to 'Back', :back, class: "btn btn-dark" %>
+</div>

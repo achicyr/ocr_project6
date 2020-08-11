@@ -3,6 +3,11 @@ body#controller_activities{
     form{padding: 1em;    border-radius: .5em;    background: whitesmoke;border:0px solid;transition: box-shadow .5s, border .7s, background .3s;}
     form:not(:hover){box-shadow: 0 0 5px 1px inset;}
     form:hover{border:1px solid wheat;background: #f5deb32e;}
+    .userActivities__Index__Card{
+      .userActivities__Index__CardBody_h3>.float-right{transition: opacity .2s;}
+      &:not(:hover) .userActivities__Index__CardBody_h3>.float-right{opacity:0;}
+      &:hover .userActivities__Index__CardBody_h3>.float-right{opacity:1;}
+    }
     .card{
       transition: opacity .4s;
       &>span[class*="sprite_"]{
@@ -31,7 +36,6 @@ body#controller_activities{
         &.sprite_19{background-position:-416px 0px;}
         &.sprite_20{background-position:-520px 0px;}
       }
-      .userActivities__Index__Card{}
       .userActivities__Index__CardBody{
         .when{text-decoration:underline;font-weight:bold;}
         .howlong{}

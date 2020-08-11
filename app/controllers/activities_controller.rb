@@ -2,18 +2,9 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: [:indexUser, :add_activity, :unsubscribe]
 
-=begin
-  # POST /add_activity_to_user
-  def add_log
-    a = UsersActivity.create(users_activity_params)
-    a=current_user.users_activities.new(activity_params)
-    a.save
-    redirect_to action: :indexUser
-  end
-=end
   # POST /add_activity_to_user
   def add_activity
-    User.first.users_activities.create(users_activity_params)
+    User.find_by_id(current_user[:id]).users_activities.create(users_activity_params)
     #redirect_to Activity.all, notice: 'Congratulation '+current_user.email[(current_user.email.index('.')-1)+1..(current_user.email.index('@')-1)]+", you've just added activity '#{@act_to_add}' to your activities list !"
     redirect_to({action: "indexUser"})
   end
@@ -26,6 +17,22 @@ class ActivitiesController < ApplicationController
     @activity = UsersActivity.new
     @activities = Activity.all
     @newActivity = UsersActivity.new
+  end
+  # GET /edit/:id
+  def editLog
+    @u_activity = UsersActivity.find_by_id(params[:id])
+  end
+  # DELETE /edit/:id
+  def deleteLog
+    @u_activity = UsersActivity.find_by_id(params[:id]).destroy
+    redirect_to user_activity_index_path
+  end
+  # POST /tt/:id
+  def updateLog
+    #User.first.users_activities.update(users_activity_params)
+    #redirect_to :back
+    UsersActivity.find_by_id(params["users_activity"]["activity_id"]).update(users_activity_params)
+    redirect_to user_activity_index_path
   end
 
   # GET /activities/1
@@ -73,13 +80,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # POST /activities/1
-  # POST /activities/1.json
-  def unsubscribe
-    puts"\n\n\n#{params} --- \n\n\n"
-    current_user.activities.destroy(params[:id])
-    redirect_to Activity
-  end
 
   # DELETE /activities/1
   # DELETE /activities/1.json

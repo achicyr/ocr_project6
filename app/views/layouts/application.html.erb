@@ -8,23 +8,12 @@
       rel="stylesheet">
   </head>
   <body id="<%= "controller_"+controller_name %>" class="<%= "container action_"+params[:action] %>">
-    <!--div id="bo_dashboard" class="row">
-      <ul class="todolist todo col clean text-warning">
-        <li>mettre en place le lien vers le compte user</li>
-      </ul>
-      <ul class="todolist done col clean text-success">
-        <li>footer: créer des json/hash, pour boucler dessus et générer les infos de "partenars" et "contact"</li>
-        <li>les pages sign in, sign up à intégrer avec bootstrap</li>
-        <li></li>
-      </ul>
-    </div-->
     <header class="mb-3">
       <%= render "layouts/components/navbar", type: "header" %>
       <% if notice %>
         <p id="notice" class="text-center bg-success py-3"><%= notice %></p>
       <% end %>
   	</header>
-
     <%= render "jumbotron" if current_page? root_path %>
   	<main>
       <%= yield %>

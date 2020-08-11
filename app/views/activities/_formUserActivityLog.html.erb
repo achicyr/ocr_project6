@@ -1,0 +1,31 @@
+<%= form_with model: u_activity, local: true, url: {action: "updateLog"}, html: {class:"my-5"} do |form| %>
+  <% if u_activity.errors.any? %>
+    <div id="error_explanation" class="bg-danger p-3 text-light">
+      <h2><%= pluralize(u_activity.errors.count, "error") %> prohibited this u_activity from being saved:</h2>
+
+      <ul>
+        <% u_activity.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :activity_id, :value => u_activity.id %>
+
+  <div class="actions">
+    <div class="form-group">
+      <%= form.label :how_long_did_your_practiced_? %>
+      <%= form.number_field :howlong, class: "form-control", placeholder: "ex: 2" %>minutes
+    </div>
+    <div class="form-group">
+      <%= form.label :when_did_you_practiced_? %>
+      <%= form.date_field :when, class: "form-control", placeholder: "ex: Séance courte mais active..." %>
+    </div>
+    <div class="form-group">
+      <%= form.label :describe_how_di_you_performances %>
+      <%= form.text_area :performances, class: "form-control", placeholder: "ex: Séance courte mais active..." %>
+    </div>
+    <%= form.submit "Update activity log", class: "btn btn-primary" %>
+  </div>
+<% end %>

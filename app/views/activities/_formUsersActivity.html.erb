@@ -12,16 +12,8 @@
   </div>
 <% end %>
   <h3 class="text-center">Select an activity to log on your recent(s) performance(s):</h3>
-  <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }.excluding(forformselect)), class: "custom-select my-3") %>
-  <%#= select_tag(:activity_id, options_for_select(Activity.all.collect{|p| [ p.name.capitalize, p.id ] }), class: "custom-select my-3") %>
-  <%#= f.collection_select :activity_id, Activity.order(:name),:id,:name, {include_blank: "Select your activity"}, {class: "custom-select my-3"} %>
   <%= f.collection_select :activity_id, Activity.order(:name),:id,:name, {}, {class: "custom-select my-3"} %>
   <hr>
-  <!--
-  <button type="button" class="close" aria-label="Close" data-action="$(this).closest('.card').removeClass('beforeoverall on')" data-remove="0">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  -->
   <%= f.hidden_field :user_id, :value => user %>
   <div class="form-group">
     <h3><%= f.label :how_long_did_you_performed_this_activity_? %></h3>
